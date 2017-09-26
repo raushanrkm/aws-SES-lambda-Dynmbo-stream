@@ -11,9 +11,10 @@
 #
 # Happy Coding!
 
-service: dynamodb-nodejs # NOTE: update this with your service name
+service: raushan-mahaseth # NOTE: update this with your service name
 plugins:
   - serverless-offline
+  - serverless-plugin-aws-alerts
 
 
 # You can pin your service to only deploy with a specific Serverless version
@@ -23,6 +24,33 @@ plugins:
 provider:
   name: aws
   runtime: nodejs6.10
+
+custom:
+  alerts:
+    #stages: # Optionally - select which stages to deploy alarms to
+      #- producton
+     # - staging
+
+    dashboards: true
+    topics:
+          alarm: 'alerts-alarm'
+
+          customAlarm:
+            description: 'My custom alarm'
+            namespace: 'AWS/DynamoDB'
+            Dimensions:
+              TableName: 'UserDetail'
+              Operation: 'PutItem'
+            metric: SuccessfulRequestLatency
+            threshold: 0
+            statistic: Average
+            period: 5
+            evaluationPeriods: 1
+            comparisonOperator: GreaterThanOrEqualToThreshold
+
+
+
+
 
 
 # you can overwrite defaults here

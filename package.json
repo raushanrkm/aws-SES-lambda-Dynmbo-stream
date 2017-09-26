@@ -13,6 +13,7 @@
     "json-parser": "^1.1.5",
     "offline": "0.0.1",
     "serverless": "^1.23.0",
-    "serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.16.0",
+    "serverless-plugin-aws-alerts": "^1.2.4"
   }
 }
